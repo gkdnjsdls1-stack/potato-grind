@@ -101,6 +101,62 @@ def find_raw(prefix: str) -> Path | None:
     return hits[0] if hits else None
 
 
+# 제미나이 워터마크(흰 반짝이)의 투명도 지도. 1024×1024 출력에서는 늘 같은 자리(844,844부터 120×120)에
+# 같은 투명도(최대 0.31)로 덧씌워진다. 마젠타 배경 원본 11장에서 재서 만든 것.
+WM_FILE = Path(__file__).with_name("gemini_watermark_1024.png")
+WM_AT = (844, 844)
+
+
+def unwatermark(img: Image.Image) -> Image.Image:
+    """배경을 빼지 않는 그림(타일)에서 워터마크를 역산해 지운다: 원래색 = (지금색 - a*255) / (1 - a)."""
+    if img.size != (1024, 1024) or not WM_FILE.exists():
+        return img
+    a = np.asarray(Image.open(WM_FILE), dtype=np.float32)[..., None] / 255
+    rgb = np.asarray(img, dtype=np.float32).copy()
+    x, y = WM_AT
+    h, w = a.shape[:2]
+    patch = rgb[y:y + h, x:x + w]
+    rgb[y:y + h, x:x + w] = np.clip((patch - a * 255) / (1 - a), 0, 255)
+    return Image.fromarray(rgb.astype(np.uint8))
+
+
+def seamless(img: Image.Image) -> Image.Image:
+    """이어 붙였을 때 가장자리 색이 맞도록 고친다 (주기 + 매끈 성분 분해, Moisan 2011).
+
+    그림에서 '가장자리 어긋남만 설명하는 아주 매끈한 성분'을 빼서, 위·아래·좌·우가 맞물리게 한다.
+    안쪽 그림은 거의 그대로다. 가장자리에서 잘린 물건(반쪽 물웅덩이 등)은 못 고친다.
+    """
+    u = np.asarray(img, dtype=np.float64)
+    h, w, _ = u.shape
+    v = np.zeros_like(u)
+    v[0] += u[-1] - u[0]
+    v[-1] += u[0] - u[-1]
+    v[:, 0] += u[:, -1] - u[:, 0]
+    v[:, -1] += u[:, 0] - u[:, -1]
+    q = np.arange(h)[:, None]
+    r = np.arange(w)[None, :]
+    den = 2 * np.cos(2 * np.pi * q / h) + 2 * np.cos(2 * np.pi * r / w) - 4
+    den[0, 0] = 1
+    s = np.empty_like(u)
+    for c in range(3):
+        sh = np.fft.fft2(v[..., c]) / den
+        sh[0, 0] = 0
+        s[..., c] = np.real(np.fft.ifft2(sh))
+    return Image.fromarray(np.clip(u - s, 0, 255).round().astype(np.uint8))
+
+
+def resize_tile(img: Image.Image, size: int) -> Image.Image:
+    """줄일 때 가장자리가 반대편 가장자리를 참고하게 해서(감싸기) 이음새에 번짐이 안 생기게 한다."""
+    w, h = img.size
+    pad = w // 8
+    a = np.asarray(img)
+    wrapped = Image.fromarray(np.pad(a, ((pad, pad), (pad, pad), (0, 0)), mode="wrap"))
+    s = size / w
+    big = wrapped.resize((round(wrapped.width * s), round(wrapped.height * s)), Image.LANCZOS)
+    p = round(pad * s)
+    return big.crop((p, p, p + size, p + size))
+
+
 def magenta_score(rgb: np.ndarray) -> np.ndarray:
     """min(R,B) - G. 마젠타는 크고, 크림·갈색 외곽선은 0 이하."""
     return np.minimum(rgb[..., 0], rgb[..., 2]) - rgb[..., 1]
@@ -284,7 +340,8 @@ def main() -> int:
             continue
         img = Image.open(path)
         if kind == "tile":
-            img.convert("RGB").resize((size, size), Image.LANCZOS).save(OUT / f"{name}.png", optimize=True)
+            tile = seamless(unwatermark(img.convert("RGB")))
+            resize_tile(tile, size).save(OUT / f"{name}.png", optimize=True)
             done.append(name)
         elif kind == "sprite":
             fit(trim(key(img)), size).save(OUT / f"{name}.png", optimize=True)

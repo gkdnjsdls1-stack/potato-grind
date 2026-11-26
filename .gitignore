@@ -5,3 +5,4 @@ dist-ssr
 *.tsbuildinfo
 .vercel
 .DS_Store
+.venv

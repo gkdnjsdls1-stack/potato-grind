@@ -105,7 +105,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 4-9. 손님 1 — 조용한 사람
 
 ```
-A villager customer standing facing the viewer with the same body proportions as the farmer character. Round friendly face, simple dot eyes, calm closed-mouth expression. Wears a sage green knit vest over a cream shirt. Grey-brown bob haircut. Full body, orthographic, standing on flat ground, no perspective distortion.
+A villager customer standing facing the viewer with the same body proportions as the farmer character. Round friendly face, simple dot eyes, calm closed-mouth expression. Wears a sage green knit vest over a cream shirt. Grey-brown bob haircut. Full body, orthographic, no perspective distortion, nothing underneath — no ground, no floor, no shadow. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -113,7 +113,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 4-10. 손님 2 — 까칠한 사람
 
 ```
-A villager customer standing facing the viewer with the same body proportions as the farmer character. Slightly grumpy expression, flat straight mouth line, narrow eyes. Wears a terracotta jacket over a beige shirt. Short dark hair. Arms crossed. Full body, orthographic, standing on flat ground, no perspective distortion.
+A villager customer standing facing the viewer with the same body proportions as the farmer character. Slightly grumpy expression, flat straight mouth line, narrow eyes. Wears a terracotta jacket over a beige shirt. Short dark hair. Arms crossed. Full body, orthographic, no perspective distortion, nothing underneath — no ground, no floor, no shadow. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -121,7 +121,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 4-11. 손님 3 — 밝은 사람
 
 ```
-A villager customer standing facing the viewer with the same body proportions as the farmer character. Cheerful open smile, happy curved eyes. Wears a dusty lavender coat and a wide brown straw hat. Full body, orthographic, standing on flat ground, no perspective distortion.
+A villager customer standing facing the viewer with the same body proportions as the farmer character. Cheerful open smile, happy curved eyes. Wears a dusty lavender coat and a wide brown straw hat. Full body, orthographic, no perspective distortion, nothing underneath — no ground, no floor, no shadow. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -129,7 +129,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 4-12. 손님 4 — 할머니
 
 ```
-A small elderly villager customer standing facing the viewer, same art style as the farmer character but shorter and rounder. Cream shawl over a sage green dress, white hair in a bun, warm closed-eye smile with soft round cheeks. Full body, orthographic, standing on flat ground, no perspective distortion.
+A small elderly villager customer standing facing the viewer, same art style as the farmer character but shorter and rounder. Cream shawl over a sage green dress, white hair in a bun, warm closed-eye smile with soft round cheeks. Full body, orthographic, no perspective distortion, nothing underneath — no ground, no floor, no shadow. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -137,7 +137,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 4-13. 손님 5 — 아이
 
 ```
-A child villager customer standing facing the viewer, same art style as the farmer character but noticeably shorter with a proportionally bigger head. Yellow-beige overalls over a cream shirt, messy brown hair, excited open mouth and wide round eyes. Full body, orthographic, standing on flat ground, no perspective distortion.
+A child villager customer standing facing the viewer, same art style as the farmer character but noticeably shorter with a proportionally bigger head. Yellow-beige overalls over a cream shirt, messy brown hair, excited open mouth and wide round eyes. Full body, orthographic, no perspective distortion, nothing underneath — no ground, no floor, no shadow. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -161,7 +161,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 4-16. 빚쿨리
 
 ```
-A debt collector character standing facing the viewer with the same body proportions as the farmer character. Wears a severe charcoal grey suit that is slightly too big, holds a rolled-up paper under one arm. Narrow squinting eyes, flat unimpressed mouth, slicked-back dark hair. Comically stiff upright posture. Still cute, not scary. Full body, orthographic, standing on flat ground, no perspective distortion.
+A debt collector character standing facing the viewer with the same body proportions as the farmer character. Wears a severe charcoal grey suit that is slightly too big, holds a rolled-up paper under one arm. Narrow squinting eyes, flat unimpressed mouth, slicked-back dark hair. Comically stiff upright posture. Still cute, not scary. Full body, orthographic, no perspective distortion, nothing underneath — no ground, no floor, no shadow. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -277,7 +277,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 5-14. 쌓인 감자 더미
 
 ```
-A pile of harvested potatoes heaped on a wooden plank floor, about thirty tan potatoes stacked into a rounded mound. Top-down three-quarter angle, orthographic, no perspective distortion.
+A loose heap of about thirty tan potatoes piled into a rounded mound, an isolated object floating in empty space. Do not draw any wooden board, plank, floor, crate, table or surface of any kind under or behind the potatoes. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge. Top-down three-quarter angle, orthographic, no perspective distortion.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -445,7 +445,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 7-7. 통감자 구이
 
 ```
-A whole roasted potato on a small cream plate. The potato skin is golden brown with a few darker roasted patches. Three-quarter view from slightly above, orthographic.
+A whole roasted potato on a small cream plate. The potato skin is golden brown with a few darker roasted patches. Three-quarter view from slightly above, orthographic. The plate floats on its own with nothing underneath — no table, no counter, no tablecloth. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -453,7 +453,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 7-8. 감자채 볶음
 
 ```
-A portion of stir-fried potato julienne on a small cream plate: pale golden strips tangled into a neat mound. Three-quarter view from slightly above, orthographic.
+A portion of stir-fried potato julienne on a small cream plate: pale golden strips tangled into a neat mound. Three-quarter view from slightly above, orthographic. The plate floats on its own with nothing underneath — no table, no counter, no tablecloth. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -461,7 +461,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 7-9. 감자전
 
 ```
-A round Korean potato pancake on a small cream plate: a flat golden-brown disc with slightly crispy irregular edges. Three-quarter view from slightly above, orthographic.
+A round Korean potato pancake on a small cream plate: a flat golden-brown disc with slightly crispy irregular edges. Three-quarter view from slightly above, orthographic. The plate floats on its own with nothing underneath — no table, no counter, no tablecloth. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -469,7 +469,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 7-10. 탄 감자전
 
 ```
-A round Korean potato pancake that has been burnt, on a small cream plate: the disc is dark charred brown with blackened patches, with two small wisps of grey smoke rising from it. Three-quarter view from slightly above, orthographic.
+A round Korean potato pancake that has been burnt, on a small cream plate: the disc is dark charred brown with blackened patches, with two small wisps of grey smoke rising from it. Three-quarter view from slightly above, orthographic. The plate floats on its own with nothing underneath — no table, no counter, no tablecloth. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
@@ -493,7 +493,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 ## 7-13. 감자전 탑
 
 ```
-A tall neat stack of about twelve round golden-brown potato pancakes piled on a cream plate, leaning very slightly. Straight-on front view at eye level, orthographic, no perspective.
+A tall neat stack of about twelve round golden-brown potato pancakes piled on a cream plate, leaning very slightly. Straight-on front view at eye level, orthographic, no perspective. The plate floats on its own with nothing underneath — no table, no counter, no tablecloth. The entire background must be one solid magenta rectangle, #FF00FF, edge to edge.
 Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```

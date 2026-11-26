@@ -4,6 +4,9 @@
 
 ## 먼저 읽을 것
 
+> **기준 이미지는 이미 나왔다.** `art/raw/04-1-hero-front.png`. 앞으로 모든 블록에 이 파일을 첨부한다.
+> 아래 프롬프트의 색값은 그 그림에서 직접 뽑아낸 실제 값으로 바꿔 놨다. `src/tokens.ts`와 같은 숫자다.
+
 **1. 주인공 정면(4-1)을 제일 먼저 뽑는다.** 마음에 들 때까지 반복한다. 그게 기준 이미지다.
 
 **2. 4-1 말고 나머지는 전부 기준 이미지를 첨부해서 뽑는다.** 레퍼런스를 참고하라는 문장은 이미 모든 블록 끝에 들어가 있으니, 이미지만 같이 올리면 된다.
@@ -28,25 +31,32 @@
 
 ```
 A young potato farmer-cook character standing facing the viewer, friendly and simple. Wears a dusty blue apron over a terracotta shirt, brown boots, short brown hair. Simple dot eyes and a small smile. Cute but not childish. Arms relaxed at the sides. Full body, orthographic, standing on flat ground, no perspective distortion, feet at the bottom of the frame.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel like a relaxing cafe management game. Simple and readable at small size. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel like a relaxing cafe management game. Simple and readable at small size. Solid flat magenta background, exact color #FF00FF, no shadow.
 ```
 
 ## 4-2. 주인공 4방향 걷기 시트
 
 ```
-A 4x4 sprite sheet grid on a single image, 4 rows and 4 columns, evenly spaced cells, each cell exactly the same size with the character at exactly the same scale and centered in its cell. Row 1: the character walking toward the viewer, 4 walk frames. Row 2: the character walking away from the viewer, back of the head visible, no face, 4 frames. Row 3: the character walking in full left profile, 4 frames. Row 4: the character walking in full right profile, 4 frames. The character's height, proportions, colors and outline must be identical in all 16 cells. Thin magenta grid lines separating the cells.
-The character is a young potato farmer-cook in a dusty blue apron over a terracotta shirt, brown boots, short brown hair, simple dot eyes. Orthographic, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+A 4x4 sprite sheet grid on a single image, 4 rows and 4 columns, evenly spaced cells, each cell exactly the same size with the character at exactly the same scale and centered in its cell. Thin magenta grid lines separating the cells.
+Row 1 — FRONT view: the character faces the viewer and walks toward the camera. Both eyes visible.
+Row 2 — BACK view: the character walks away from the camera. Only the back of the head is visible. No face, no eyes, no nose in any cell of this row.
+Row 3 — SIDE view facing LEFT: the character's nose, chest and toes all point toward the LEFT edge of the image, and the character walks leftward. Pure side profile with one eye visible, not a three-quarter turn.
+Row 4 — SIDE view facing RIGHT: the character's nose, chest and toes all point toward the RIGHT edge of the image, and the character walks rightward. Row 4 is the horizontal mirror of row 3. Rows 3 and 4 must point in opposite directions — do not draw them both facing the same way.
+In every row the 4 cells are one walk cycle and the leg positions must be clearly different from each other: cell 1 left foot forward, cell 2 feet together, cell 3 right foot forward, cell 4 feet together. The character's height, proportions, colors and outline are identical in all 16 cells.
+The character is a young potato farmer-cook in a dusty blue apron over a terracotta shirt, brown trousers, dark brown boots, short brown hair, simple dot eyes. Orthographic, no perspective distortion.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, skin #F9E1C4, hair brown #785343, trouser brown #95765A, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
-> 프레임 4개가 너무 비슷하면 `4 walk frames` → `3 frames: left foot forward, both feet together, right foot forward` 로 줄인다.
+> 3·4번째 줄이 또 같은 쪽을 보면 그 시트는 버리고 4-5(옆모습 걷기) 한 줄만 뽑아서 코드에서 좌우 반전한다. 반전하면 좌우가 어긋날 일이 아예 없다.
+>
+> 프레임 4개가 너무 비슷하면 `4 cells` → `3 cells: left foot forward, both feet together, right foot forward` 로 줄인다.
 
 ## 4-3. 정면 걷기 (시트가 안 될 때)
 
 ```
 The same potato farmer-cook character walking toward the viewer, 3 frames side by side in a single row at identical scale and proportions: left foot forward, both feet together, right foot forward. Wears a dusty blue apron over a terracotta shirt, brown boots, short brown hair, simple dot eyes. Full body, orthographic, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -54,7 +64,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 The same potato farmer-cook character seen from directly behind, walking away from the viewer, back of the head and apron strings visible, no face at all. 3 frames side by side in a single row at identical scale: left foot forward, both feet together, right foot forward. Dusty blue apron, terracotta shirt, brown boots, short brown hair. Full body, orthographic, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -62,7 +72,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 The same potato farmer-cook character in full side profile facing right, walking. 3 frames side by side in a single row at identical scale: left foot forward, both feet together, right foot forward. Pure side view with one eye visible, not a three-quarter turn. Dusty blue apron, terracotta shirt, brown boots, short brown hair. Full body, orthographic, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -72,7 +82,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 The same potato farmer-cook character swinging a hoe downward to till the soil, seen from a top-down three-quarter angle. 3 frames side by side at identical scale: hoe raised above the head, hoe halfway down, hoe striking the ground. Dusty blue apron, terracotta shirt, brown boots, short brown hair. Orthographic.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -80,7 +90,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 The same potato farmer-cook character bending down to pick a potato up from the ground, seen from a top-down three-quarter angle. 2 frames side by side at identical scale: bending down, standing back up holding a tan potato. Dusty blue apron, terracotta shirt, brown boots, short brown hair. Orthographic.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -88,7 +98,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 The same potato farmer-cook character pouring water from a watering can onto the ground, seen from a top-down three-quarter angle. 2 frames side by side at identical scale: tilting the can, water pouring out in a stream. Dusty blue apron, terracotta shirt, brown boots, short brown hair. Orthographic.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -96,7 +106,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A villager customer standing facing the viewer with the same body proportions as the farmer character. Round friendly face, simple dot eyes, calm closed-mouth expression. Wears a sage green knit vest over a cream shirt. Grey-brown bob haircut. Full body, orthographic, standing on flat ground, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -104,7 +114,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A villager customer standing facing the viewer with the same body proportions as the farmer character. Slightly grumpy expression, flat straight mouth line, narrow eyes. Wears a terracotta jacket over a beige shirt. Short dark hair. Arms crossed. Full body, orthographic, standing on flat ground, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -112,7 +122,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A villager customer standing facing the viewer with the same body proportions as the farmer character. Cheerful open smile, happy curved eyes. Wears a dusty lavender coat and a wide brown straw hat. Full body, orthographic, standing on flat ground, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -120,7 +130,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A small elderly villager customer standing facing the viewer, same art style as the farmer character but shorter and rounder. Cream shawl over a sage green dress, white hair in a bun, warm closed-eye smile with soft round cheeks. Full body, orthographic, standing on flat ground, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -128,7 +138,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A child villager customer standing facing the viewer, same art style as the farmer character but noticeably shorter with a proportionally bigger head. Yellow-beige overalls over a cream shirt, messy brown hair, excited open mouth and wide round eyes. Full body, orthographic, standing on flat ground, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -136,7 +146,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A sheet of 6 facial expressions for the same villager character, head and shoulders only, arranged in one row of 6 evenly spaced cells at identical scale. In order: neutral waiting, delighted with sparkling eyes, impatient with a flat frown, angry with furrowed brows, surprised with wide round eyes, sleepy with half-closed eyes. The same face shape, hair and colors in all 6 cells. Orthographic, straight-on.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -144,7 +154,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A small round potato fairy floating in the air, about the size of a child's hand. A smooth oval potato body in pale creamy tan with a few darker potato eyes dotted on it. Two tiny translucent pale blue wings. Big friendly dot eyes and a small smile. A tiny four-pointed gold sparkle floating above its head. No arms, two tiny stub legs. Orthographic, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -152,7 +162,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A debt collector character standing facing the viewer with the same body proportions as the farmer character. Wears a severe charcoal grey suit that is slightly too big, holds a rolled-up paper under one arm. Narrow squinting eyes, flat unimpressed mouth, slicked-back dark hair. Comically stiff upright posture. Still cute, not scary. Full body, orthographic, standing on flat ground, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -164,7 +174,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A square ground tile of dry untilled earth, pale warm sandy brown, with a few small scattered pebbles and tiny grass tufts. The tile edges must be seamless so it tiles with copies of itself. Top-down view looking straight down from directly above, orthographic, no perspective, no sense of depth.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -172,7 +182,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A square ground tile of freshly tilled soil, darker rich brown, with evenly spaced parallel furrow ridges running horizontally across the tile. The tile edges must be seamless so it tiles with copies of itself. Top-down view looking straight down from directly above, orthographic, no perspective, no sense of depth.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -180,7 +190,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A square ground tile of tilled soil with one small potato seed piece planted in the center, the soil mounded slightly over it. The tile edges must be seamless so it tiles with copies of itself. Top-down view looking straight down from directly above, orthographic, no perspective, no sense of depth.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -188,7 +198,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A square ground tile of wet watered soil, noticeably darker and richer brown than dry soil, with a few small water droplet shapes on the surface. The tile edges must be seamless so it tiles with copies of itself. Top-down view looking straight down from directly above, orthographic, no perspective, no sense of depth.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -196,7 +206,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A square ground tile of soil with a young potato sprout growing in the center: a short stem with two or three small rounded sage green leaves. The tile edges must be seamless so it tiles with copies of itself. Top-down view looking straight down from directly above, orthographic, no perspective, no sense of depth.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -204,7 +214,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A square ground tile of soil with a fully grown potato plant in the center: a bushy clump of rounded sage green leaves filling most of the tile, with a few tiny white flowers. The tile edges must be seamless so it tiles with copies of itself. Top-down view looking straight down from directly above, orthographic, no perspective, no sense of depth.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Simple and readable at small size.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -212,7 +222,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A single grey field stone sitting on the ground, rounded and smooth, roughly the size of a melon. No ground underneath, the object only. Top-down view looking straight down from directly above, orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -220,7 +230,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A single clump of tall weeds, a dense tuft of thin sage green leaves spreading outward from one point. No ground underneath, the object only. Top-down view looking straight down from directly above, orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -228,7 +238,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A single fallen dry branch lying on the ground, a short forked twig in grey-brown. No ground underneath, the object only. Top-down view looking straight down from directly above, orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -236,7 +246,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A single small tree seen from directly above: a round bushy canopy of sage green leaves with a hint of the brown trunk at the very center. No ground underneath, the object only. Top-down view looking straight down from directly above, orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -244,7 +254,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A tree stump seen from directly above: a flat circular cut surface in pale tan with concentric growth rings, surrounded by a ring of darker brown bark. No ground underneath, the object only. Top-down view looking straight down from directly above, orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -252,7 +262,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A small cozy cottage with a warm terracotta tiled roof, cream plastered walls, a dusty blue wooden door and two small square windows. Slightly weathered and old but cared for. The whole building fits inside the frame. Top-down three-quarter angle, orthographic, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -260,7 +270,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A small wooden storage shed, open on the front side so the empty plank interior is visible. Warm brown timber walls, sage green roof. The whole building fits inside the frame. Top-down three-quarter angle, orthographic, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -268,7 +278,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A pile of harvested potatoes heaped on a wooden plank floor, about thirty tan potatoes stacked into a rounded mound. Top-down three-quarter angle, orthographic, no perspective distortion.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -276,7 +286,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A seamless tileable ground texture for a farm yard: patchy sage green grass over pale sandy soil, very low contrast and calm so that objects placed on top of it stay clearly readable. No objects, no rocks, no plants, ground only. Top-down view looking straight down from directly above, orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -288,7 +298,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A simple kitchen sink basin, cream ceramic with a dusty blue curved faucet. Shallow and wide, the basin interior visible. Straight-on front view at eye level, orthographic, no perspective, object centered.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -296,7 +306,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A wooden cutting board, warm honey-brown wood with a simple rounded edge and a round hanging hole in one corner. Tilted so the top surface is fully visible. Straight-on front view, orthographic, no perspective, object centered.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -304,7 +314,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A hand-held box grater standing upright, dusty blue metal with a visible grid of grating holes on the front face and a rounded handle on top. Straight-on front view at eye level, orthographic, no perspective, object centered.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -312,7 +322,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A round cast-iron frying pan seen from directly above, completely empty, dark charcoal grey with a short warm brown wooden handle pointing toward the bottom of the frame. Orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -320,7 +330,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A simple gas stove burner seen from directly above: a dark charcoal circular burner ring on a pale cream stovetop panel. Empty, no pan on it. Orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -328,7 +338,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A long horizontal kitchen counter: a pale cream work surface above a warm beige wooden front panel with two simple drawer lines. Wide and low. Straight-on front view at eye level, orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -336,7 +346,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A small metal waste bin, dusty blue with a slightly tapered body and a thin rim, open at the top. Straight-on front view at eye level, orthographic, no perspective, object centered.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -344,7 +354,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A Y-shaped vegetable peeler with a dusty blue plastic handle and a pale grey metal blade. Straight-on front view, orthographic, no perspective, object centered.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -352,7 +362,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A kitchen knife in side profile with the blade pointing left: a pale grey blade and a warm brown wooden handle. Straight-on side view, orthographic, no perspective, object centered.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -360,7 +370,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A wooden spatula in side profile, warm honey-brown, with a rounded flat head and a long straight handle. Straight-on side view, orthographic, no perspective, object centered.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -368,7 +378,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A metal watering can in side profile, dusty blue, with a long spout pointing left and a rounded carrying handle on top. Straight-on side view, orthographic, no perspective, object centered.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -376,7 +386,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 An empty woven basket in warm tan wicker, shallow and wide. Three-quarter view from slightly above, orthographic, nothing underneath it.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -388,7 +398,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A single raw potato, a smooth rounded oval in warm tan with a few small darker dimpled eyes on the surface. Nothing else in the frame. Three-quarter view from slightly above, orthographic, nothing underneath it.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -396,7 +406,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A single premium potato, a smooth rounded oval in a richer golden tan, slightly larger and plumper than an ordinary potato, with a few small darker eyes and a thin warm gold outline ring around it. Three-quarter view from slightly above, orthographic, nothing underneath it.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -404,7 +414,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A single seed potato piece: a potato cut in half showing the pale cream cut face, with one small pale sprout growing from the skin side. Three-quarter view from slightly above, orthographic, nothing underneath it.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -412,7 +422,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A single peeled potato, a smooth rounded oval in pale creamy yellow with no skin and no eyes at all. Nothing else in the frame. Three-quarter view from slightly above, orthographic, nothing underneath it.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -420,7 +430,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A small neat pile of raw potato julienne sticks, thin matchstick strips in pale creamy yellow heaped into a loose mound. Three-quarter view from slightly above, orthographic, nothing underneath it.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -428,7 +438,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A small mound of grated raw potato batter, a soft heap in pale creamy yellow with a slightly rough irregular edge. Three-quarter view from slightly above, orthographic, nothing underneath it.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -436,7 +446,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A whole roasted potato on a small cream plate. The potato skin is golden brown with a few darker roasted patches. Three-quarter view from slightly above, orthographic.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -444,7 +454,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A portion of stir-fried potato julienne on a small cream plate: pale golden strips tangled into a neat mound. Three-quarter view from slightly above, orthographic.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -452,7 +462,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A round Korean potato pancake on a small cream plate: a flat golden-brown disc with slightly crispy irregular edges. Three-quarter view from slightly above, orthographic.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -460,7 +470,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A round Korean potato pancake that has been burnt, on a small cream plate: the disc is dark charred brown with blackened patches, with two small wisps of grey smoke rising from it. Three-quarter view from slightly above, orthographic.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -468,7 +478,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A round potato pancake cooking in a frying pan seen from directly above. The pan is dark charcoal grey with a short brown handle pointing down, and the pancake in the center is pale raw uncooked batter. Orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -476,7 +486,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A round potato pancake cooking in a frying pan seen from directly above. The pan is dark charcoal grey with a short brown handle pointing down, and the pancake in the center is fully cooked golden brown with slightly crisp edges. Orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -484,7 +494,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A tall neat stack of about twelve round golden-brown potato pancakes piled on a cream plate, leaning very slightly. Straight-on front view at eye level, orthographic, no perspective.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, potato tan #D8B98A, outline brown #6B5244. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline on every shape, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, potato tan #D6AC77, outline brown #563529. Soft rounded shapes, calm cozy storybook feel. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -496,7 +506,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A horizontal UI panel frame for a cozy mobile game: a rounded rectangle filled cream with a thick warm brown outline and a thin warm beige inner border line. Completely empty, no text, no icons, no decoration inside. Flat 2D interface element, straight-on, no perspective, no 3D bevel.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, outline brown #6B5244. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, outline brown #563529. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -504,7 +514,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 Two rounded rectangular buttons for a cozy mobile game side by side at identical size: the left one filled dusty blue, the right one filled terracotta, both with a thick warm brown outline. Completely empty, no text, no icons. Flat 2D interface element, straight-on, no perspective, no 3D bevel.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, outline brown #6B5244. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, outline brown #563529. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -512,7 +522,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A speech bubble for a cozy mobile game: a rounded rectangle filled cream with a thick warm brown outline and a small pointed tail at the bottom left corner. Completely empty, no text. Flat 2D interface element, straight-on, no perspective, no 3D bevel.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, outline brown #6B5244. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, outline brown #563529. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -520,7 +530,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A horizontal progress gauge for a cozy mobile game: a rounded capsule with a thick warm brown outline, filled about seventy percent from the left with sage green, the remaining part empty cream. No text, no numbers. Flat 2D interface element, straight-on, no perspective, no 3D bevel.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, outline brown #6B5244. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, outline brown #563529. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -528,7 +538,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A narrow vertical gauge for a cozy mobile game: a tall rounded capsule with a thick warm brown outline, filled from the bottom about forty percent with terracotta, the rest empty cream. No text, no numbers. Flat 2D interface element, straight-on, no perspective, no 3D bevel.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, outline brown #6B5244. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, outline brown #563529. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -536,7 +546,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A paper receipt for a cozy mobile game: a tall narrow rectangle filled cream with a zigzag torn edge along the bottom and a thick warm brown outline. Completely blank, no text, no printed lines, no numbers. Flat 2D interface element, straight-on, no perspective, no 3D bevel.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #A9BFC9, sage green #A8B894, terracotta #D9A188, outline brown #6B5244. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, dusty blue #9EB0B9, sage green #A8B192, terracotta #D38A72, outline brown #563529. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
@@ -544,7 +554,7 @@ Match the attached reference image exactly: same outline weight, same palette, s
 
 ```
 A small coin icon for a cozy mobile game: a simple flat circle in warm golden tan with a thick brown outline and a tiny flat potato silhouette in the center. No text, no numbers. Flat 2D interface element, straight-on, no perspective, no 3D bevel.
-Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, potato tan #D8B98A, outline brown #6B5244. Solid flat magenta background, exact color #FF00FF, no shadow.
+Flat vector game asset, cozy mobile game art. Uniform thick dark-brown outline, exactly the same stroke weight throughout. Completely flat solid color fills — no gradients, no shading, no highlights, no texture, no drop shadows. Muted low-saturation palette only: cream #F6EFE4, warm beige #E8D9C5, potato tan #D6AC77, outline brown #563529. Solid flat magenta background, exact color #FF00FF, no shadow.
 Match the attached reference image exactly: same outline weight, same palette, same level of detail, same flat shading. This is the same game's art set.
 ```
 
